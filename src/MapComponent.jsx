@@ -145,8 +145,12 @@ const MapComponent = ({ hospitals, setHospitals }) => {
         <Marker
           position={userLocation}
           icon={{
-            url: '/blue-dot.png',
-            scaledSize: new window.google.maps.Size(24, 24),
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 12,
+            fillColor: "#4285F4",
+            fillOpacity: 1,
+            strokeColor: "#FFFFFF",
+            strokeWeight: 2,
           }}
         />
 
