@@ -19,6 +19,27 @@ const HospitalList = ({ hospitals }) => {
     return `(${Math.floor(Math.random() * 900) + 100}) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`;
   }
 
+  const handleGetDirections = (hospital) => {
+    // Check if the browser supports geolocation
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser");
+      return;
+    }
+
+    // Get current position and navigate to Google Maps
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const destination = encodeURIComponent(hospital.vicinity);
+        const url = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destination}`;
+        window.open(url, '_blank');
+      },
+      (error) => {
+        setError("Unable to get your location. Please enable location services.");
+      }
+    );
+  };
+
   if (error) return (
     <div className="bg-red-50 border border-red-300 rounded-lg p-4">
       <p className="text-red-600 text-center font-medium">{error}</p>
@@ -46,7 +67,7 @@ const HospitalList = ({ hospitals }) => {
           {hospitals.map((hospital, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
+              className="bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-300 hover:scale-105 transform hover:-translate-y-1"
             >
               {/* Header with Rating */}
               <div className="p-4 bg-blue-50">
@@ -55,7 +76,7 @@ const HospitalList = ({ hospitals }) => {
                     {hospital.name}
                   </h3>
                   {hospital.rating && (
-                    <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-full">
+                    <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-full shadow-sm">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
                       <span className="text-sm font-medium">{hospital.rating}</span>
                     </div>
@@ -88,10 +109,16 @@ const HospitalList = ({ hospitals }) => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-2">
-                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+                  <button 
+                    onClick={() => handleGetDirections(hospital)}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 cursor-pointer rounded-lg text-sm font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+                  >
                     Get Directions
                   </button>
-                  <button className="flex items-center justify-center p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors duration-200">
+                  <button 
+                    onClick={() => handleGetDirections(hospital)}
+                    className="flex items-center justify-center p-2 cursor-pointer text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
+                  >
                     <Navigation className="w-5 h-5" />
                   </button>
                 </div>

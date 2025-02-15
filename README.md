@@ -2,7 +2,7 @@
 
 ## Screenshots 
 ![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](image.png)
 ---
 
 ## Tech Stack
@@ -49,3 +49,6 @@ npm run dev
 
 
 ---
+
+## 🔗 Deployment Link
+https://hospitals-navigator.vercel.app/
