@@ -2,13 +2,13 @@
 
 ## Screenshots 
 ![alt text](image-2.png)
+
+
 ![alt text](image.png)
 ---
 
 ## Tech Stack
-React, Tailwind CSS
-Firebase Authentication
-Google Maps API
+React, Tailwind CSS, Firebase Authentication, Google Maps API
 
 ---
 
@@ -24,7 +24,7 @@ cd HospitalsNavigator
 npm install
 ```
 
-### Set Up Firebase
+### Set Up Firebase 
 Create a `.env` file in the root directory and add your Firebase credentials:
 ```sh
 VITE_API_KEY=your_api_key

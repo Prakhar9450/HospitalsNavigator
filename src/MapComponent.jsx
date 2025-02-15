@@ -146,7 +146,7 @@ const MapComponent = ({ hospitals, setHospitals }) => {
           position={userLocation}
           icon={{
             path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 12,
+            scale: 8,
             fillColor: "#4285F4",
             fillOpacity: 1,
             strokeColor: "#FFFFFF",
