@@ -20,17 +20,16 @@ const HospitalList = ({ hospitals }) => {
   }
 
   const handleGetDirections = (hospital) => {
-    // Check if the browser supports geolocation
+  
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser");
       return;
     }
 
-    // Get current position and navigate to Google Maps
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        const destination = encodeURIComponent(hospital.vicinity);
+        const destination = encodeURIComponent(`${hospital.name}, ${hospital.vicinity}`);
         const url = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destination}`;
         window.open(url, '_blank');
       },
