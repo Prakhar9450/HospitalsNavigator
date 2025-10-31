@@ -51,4 +51,4 @@ npm run dev
 ---
 
 ## 🔗 Deployment Link
-https://hospitals-navigator.vercel.app/
+https://hospital-nav.vercel.app/
